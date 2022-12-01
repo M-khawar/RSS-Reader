@@ -185,7 +185,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        App\Packages\FeedReader\RssReaderProvider::class,
         /*
          * Application Service Providers...
          */
