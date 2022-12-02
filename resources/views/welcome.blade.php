@@ -412,7 +412,8 @@
 
         <div class="col-7">
             @forelse($feeds as $feed)
-                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
+                <div data-followup="{{ $feed->link }}"
+                     class="rss-feed-wrapper mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
                     <main class="p-6 py-6 px-4 sm:p-6 md:py-10 md:px-8">
                         <div class="max-w-4xl mx-auto grid grid-cols-1 lg:max-w-5xl lg:gap-x-20 lg:grid-cols-2">
                             <div
@@ -457,8 +458,48 @@
         <div class="col-12 mt-2">
             {{ $feeds->links() }}
         </div>
+
+        <div class="modal fade" id="rss-feed-followup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            In order to read a feed news plz click on 'Read More' button.
+                        </p>
+                        <a href="" id="followup-modal" target="_blank" class="btn btn-secondary text-center">
+                            Read More
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script>
+    $(".rss-feed-wrapper").click(function (el) {
+        console.log(el)
+        let followupLink = el.target.closest("[data-followup]").dataset.followup;
+        $('#followup-modal')[0].href = followupLink
+        $("#rss-feed-followup").modal('show');
+    });
+</script>
+
 </body>
 </html>
