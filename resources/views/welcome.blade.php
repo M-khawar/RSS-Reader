@@ -494,10 +494,11 @@
         crossorigin="anonymous"></script>
 <script>
     $(".rss-feed-wrapper").click(function (el) {
-        console.log(el)
-        let followupLink = el.target.closest("[data-followup]").dataset.followup;
-        $('#followup-modal')[0].href = followupLink
-        $("#rss-feed-followup").modal('show');
+        if(el.target.nodeName != 'A'){
+            let followupLink = el.target.closest("[data-followup]").dataset.followup;
+            $('#followup-modal')[0].href = followupLink
+            $("#rss-feed-followup").modal('show');
+        }
     });
 </script>
 
